@@ -318,3 +318,5 @@ function borrarTextoInput() {
   document.getElementById("inputText").value = "";
   updateCharacterCount("inputText", "charCountInput", "sizeKBInput", "outputText", "charCountOutput", "sizeKBOutput");
 }
+
+document.getElementById("inputText").value = "";
