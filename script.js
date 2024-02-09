@@ -150,6 +150,30 @@ function updateCharacterCount(textAreaId, charCountSpanId, sizeKBSpanId, otherTe
   let otherText = document.getElementById(otherTextAreaId).value;
   document.getElementById(otherCharCountSpanId).textContent = otherText.length.toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, ",");
   document.getElementById(otherSizeKBSpanId).textContent = (otherText.length / 1024).toFixed(2) + " KB";
+
+  let valorizacion = document.getElementById("inputText").value;
+  valorizacion = (valorizacion.length * 100) / 100;
+  if (valorizacion > 9220) {
+    document.getElementById("dictionarySize").value = 9220;
+  } else if (valorizacion < 4610) {
+    document.getElementById("dictionarySize").value = valorizacion.toFixed(0) * 2;
+  } else if (valorizacion < 3072) {
+    document.getElementById("dictionarySize").value = valorizacion.toFixed(0) * 3;
+  } else if (valorizacion < 2304) {
+    document.getElementById("dictionarySize").value = valorizacion.toFixed(0) * 4;
+  } else if (valorizacion < 1536) {
+    document.getElementById("dictionarySize").value = valorizacion.toFixed(0) * 6;
+  } else if (valorizacion < 768) {
+    document.getElementById("dictionarySize").value = valorizacion.toFixed(0) * 12;
+  } else if (valorizacion < 384) {
+    document.getElementById("dictionarySize").value = valorizacion.toFixed(0) * 24;
+  } else if (valorizacion < 192) {
+    document.getElementById("dictionarySize").value = valorizacion.toFixed(0) * 48;
+  } else if (valorizacion < 96) {
+    document.getElementById("dictionarySize").value = valorizacion.toFixed(0) * 96;
+  } else if (valorizacion < 48) {
+    document.getElementById("dictionarySize").value = valorizacion.toFixed(0) * 192;
+  }
 }
 
 function clearTextArea() {
@@ -191,13 +215,11 @@ function compressText() {
         let endTime = performance.now();
         let elapsedTime = (endTime - startTime) / 1000;
 
-        let statsMessage = `Comprimido en ${elapsedTime.toFixed(2)} segundos (${(originalSize / elapsedTime)
+        let statsMessage = `(Ratio de compresión de ${compressionRatio.toFixed(2)}%);<br /><br />Comprimido en ${elapsedTime.toFixed(1)} segundos<br/>(${(
+          originalSize / elapsedTime
+        )
           .toFixed(0)
-          .replace(/\B(?=(\d{3})+(?!\d))/g, ",")} caracteres/segundo) con un tamaño de ventana de ${dictionarySize}.<br>`;
-        statsMessage += `El tamaño del texto original fue de ${originalSize.toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, ",")} caracteres.<br>`;
-        statsMessage += `El tamaño del texto resultante es de ${resultSize
-          .toFixed(0)
-          .replace(/\B(?=(\d{3})+(?!\d))/g, ",")} caracteres (ratio de compresión de ${compressionRatio.toFixed(2)}%).`;
+          .replace(/\B(?=(\d{3})+(?!\d))/g, ",")} caracteres/segundo)<br/>Con un tamaño de diccionario de ${dictionarySize}.`;
 
         document.getElementById("outputText").value = compressedText.replace(/\n/g, "\\n");
         document.getElementById("stats").innerHTML = statsMessage;
@@ -247,11 +269,9 @@ function decompressText() {
         let endTime = performance.now();
         let elapsedTime = (endTime - startTime) / 1000;
 
-        let statsMessage = `Descomprimido en ${elapsedTime.toFixed(2)} segundos (${(originalSize / elapsedTime)
+        let statsMessage = `Descomprimido en ${elapsedTime.toFixed(1)} segundos (${(originalSize / elapsedTime)
           .toFixed(2)
-          .replace(/\B(?=(\d{3})+(?!\d))/g, ",")} caracteres/segundo).<br>`;
-        statsMessage += `El tamaño del texto original fue de ${originalSize.toLocaleString()} caracteres.<br>`;
-        statsMessage += `El tamaño del texto resultante es de ${resultSize.toLocaleString()} caracteres.`;
+          .replace(/\B(?=(\d{3})+(?!\d))/g, ",")} caracteres/segundo).`;
 
         document.getElementById("stats").innerHTML = statsMessage;
         hideProgressModal();
@@ -270,11 +290,27 @@ function decompressText() {
 function textoPrueba() {
   document.getElementById("inputText").value = textoLorem;
   updateCharacterCount("inputText", "charCountInput", "sizeKBInput", "outputText", "charCountOutput", "sizeKBOutput");
-  const valor = (document.getElementById("dictionarySize").value = (textoLorem.length * 10) / 100);
+  const valor = (document.getElementById("dictionarySize").value = (textoLorem.length * 100) / 100);
   if (valor > 9220) {
     document.getElementById("dictionarySize").value = 9220;
-  } else {
-    document.getElementById("dictionarySize").value = valor.toFixed(0);
+  } else if (valor < 4610) {
+    document.getElementById("dictionarySize").value = valor.toFixed(0) * 2;
+  } else if (valor < 3072) {
+    document.getElementById("dictionarySize").value = valor.toFixed(0) * 3;
+  } else if (valor < 2304) {
+    document.getElementById("dictionarySize").value = valor.toFixed(0) * 4;
+  } else if (valor < 1536) {
+    document.getElementById("dictionarySize").value = valor.toFixed(0) * 6;
+  } else if (valor < 768) {
+    document.getElementById("dictionarySize").value = valor.toFixed(0) * 12;
+  } else if (valor < 384) {
+    document.getElementById("dictionarySize").value = valor.toFixed(0) * 24;
+  } else if (valor < 192) {
+    document.getElementById("dictionarySize").value = valor.toFixed(0) * 48;
+  } else if (valor < 96) {
+    document.getElementById("dictionarySize").value = valor.toFixed(0) * 96;
+  } else if (valor < 48) {
+    document.getElementById("dictionarySize").value = valor.toFixed(0) * 192;
   }
 }
 

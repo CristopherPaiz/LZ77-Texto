@@ -7,47 +7,63 @@
     <link rel="stylesheet" href="styles.css" />
   </head>
   <body>
-    <script src="texto.js"></script>
-    <script src="script.js"></script>
-    <div style="text-align: center">
-      <h1>Compresor de texto</h1>
-      <h4>Basado en el algoritmo LZ77</h4>
-    </div>
-    <button onclick="textoPrueba()">Insertar texto de prueba</button>
-    <button onclick="borrarTextoInput()">Vaciar texto entrada</button>
-    <textarea
-      id="inputText"
-      placeholder="Ingrese el texto aquí"
-      rows="15"
-      oninput="updateCharacterCount('inputText', 'charCountInput', 'sizeKBInput', 'outputText', 'charCountOutput', 'sizeKBOutput')"
-    ></textarea
-    ><br />
-    <span>Caracteres: <span id="charCountInput">0</span></span>
-    <span>Peso Total: <span id="sizeKBInput">0 KB</span></span>
-    <br />
-    <label for="dictionarySize">Tamaño del diccionario:</label>
-    <input type="number" id="dictionarySize" value="1000" max="9220" /><br />
-    <button onclick="compressText()">Comprimir</button>
-    <button onclick="decompressText()">Descomprimir</button><br />
-    <h2>Resultado:</h2>
-    <textarea
-      id="outputText"
-      placeholder="El texto comprimido/descomprimido aparecerá aquí"
-      rows="15"
-      oninput="updateCharacterCount('outputText', 'charCountOutput', 'sizeKBOutput', 'inputText', 'charCountInput', 'sizeKBInput')"
-    ></textarea
-    ><br />
-    <span>Caracteres: <span id="charCountOutput">0</span></span>
-    <span>Peso Total: <span id="sizeKBOutput">0 KB</span></span>
-    <div id="stats"></div>
+    <div class="padre">
+      <div class="titulos">
+        <p class="p1">Compresor de texto</p>
+        <p class="p2">Basado en el algoritmo LZ77</p>
+      </div>
+      <button class="botonPrueba" onclick="textoPrueba()"><img src="public/text.png" alt="Descomprimir" /> Insertar texto de prueba</button>
+      <textarea
+        id="inputText"
+        placeholder="Ingrese el texto aquí"
+        rows="15"
+        oninput="updateCharacterCount('inputText', 'charCountInput', 'sizeKBInput', 'outputText', 'charCountOutput', 'sizeKBOutput')"
+      >
+      </textarea>
+      <div class="divVaciar">
+        <div class="divInfo">
+          <span class="charSpan">Caracteres: <span class="char" id="charCountInput">0</span></span>
+          <span class="KBSpan">Peso aprox: <span class="kbInicial" id="sizeKBInput">0 KB</span></span>
+        </div>
+        <button class="botonVaciar" onclick="borrarTextoInput()"><img src="public/borrar.png" class="borrarImg" />Vaciar texto</button>
+      </div>
+      <div class="diccionariopadre">
+        <label for="dictionarySize">Tamaño del diccionario:</label>
+        <input type="number" class="diccionario" id="dictionarySize" value="4000" max="9220" min="0" />
+      </div>
+      <div class="botones">
+        <button class="buttonWithImage compressButton" onclick="compressText()"><img src="public/comprimir.png" alt="Comprimir" class="buttonImage" /> Comprimir</button>
+        <button class="buttonWithImage decompressButton" onclick="decompressText()">
+          <img src="public/zoom.png" alt="Descomprimir" class="buttonImage" /> Descomprimir
+        </button>
+      </div>
+      <h2>Resultado:</h2>
+      <textarea
+        id="outputText"
+        placeholder="El texto comprimido/descomprimido aparecerá aquí"
+        rows="15"
+        oninput="updateCharacterCount('outputText', 'charCountOutput', 'sizeKBOutput', 'inputText', 'charCountInput', 'sizeKBInput')"
+      ></textarea>
+      <div class="divVaciar">
+        <div class="divInfo">
+          <span class="charSpan">Caracteres: <span class="char" id="charCountOutput">0</span></span>
+          <span class="KBSpan">Peso aprox: <span class="kb" id="sizeKBOutput">0 KB</span></span>
+        </div>
+      </div>
 
-    <div id="progressModal" class="modal">
-      <div class="modal-content">
-        <div id="progressLabel">Procesando...</div>
-        <div class="progress-bar">
-          <div id="progress" class="progress"></div>
+      <h3>Estadísticas:</h3>
+      <div id="stats"></div>
+
+      <div id="progressModal" class="modal">
+        <div class="modal-content">
+          <div id="progressLabel">Procesando...</div>
+          <div class="progress-bar">
+            <div id="progress" class="progress"></div>
+          </div>
         </div>
       </div>
     </div>
+    <script src="texto.js"></script>
+    <script src="script.js"></script>
   </body>
 </html>
